@@ -39,7 +39,6 @@ public class TaskController {
     @PutMapping("/changestatus/{index}")
     public ApiResponse changeStatus(@PathVariable int index) {
         if(tasks.get(index).getStatus().equals("not done")){
-            System.out.println("not done");
             tasks.get(index).setStatus("done");
         }
         return new ApiResponse("task statud updated","200");
