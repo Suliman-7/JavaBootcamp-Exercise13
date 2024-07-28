@@ -37,17 +37,15 @@ public class CustomerController {
     }
 
     @PutMapping("/deposit/{index}/{amount}")
-    public ApiResponse depositCustomer(@PathVariable int index, @RequestBody Customer customer, @PathVariable double amount) {
-        customer.setBalance(customer.getBalance()+amount);
-        customers.set(index, customer);
+    public ApiResponse depositCustomer(@PathVariable int index, @PathVariable double amount) {
+        customers.get(index).setBalance(customers.get(index).getBalance()+amount);
         return new ApiResponse("amount deposited successfully","200");
     }
 
     @PutMapping("/withdraw/{index}/{amount}")
-    public ApiResponse withdrawCustomer(@PathVariable int index, @RequestBody Customer customer, @PathVariable double amount) {
-        if(customer.getBalance()>=amount) {
-            customer.setBalance(customer.getBalance()-amount);
-            customers.set(index, customer);
+    public ApiResponse withdrawCustomer(@PathVariable int index, @PathVariable double amount) {
+        if(customers.get(index).getBalance()>=amount) {
+            customers.get(index).setBalance(customers.get(index).getBalance()-amount);
             return new ApiResponse("amount withdrawn successfully","200");
         }
         else {
